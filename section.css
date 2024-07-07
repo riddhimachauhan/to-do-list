@@ -85,4 +85,18 @@ li input[type="checkbox"] {
   'GRAD' 0,
   'opsz' 24
 }
+/* Delete button */
+#deleteButton {
+    padding: 10px;
+    border: none;
+    background-color: #243994;
+    color: rgb(244, 245, 255);
+    border-radius: 30px;
+    cursor: pointer;
+    outline:none
+}
+
+#deleteButton:hover {
+    background-color: #c9302c;
+}
 
