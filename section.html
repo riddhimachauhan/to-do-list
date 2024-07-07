@@ -12,18 +12,25 @@
 </head>
 <body>
     <div class="container">
-        <h1>To-Do List
+        <h1>Tasks
             <span class="material-symbols-outlined">
                 lists
-                </span>
+            </span>
         </h1> 
         <div class="input-container">
             <input type="text" id="task-input" placeholder="Add a new task...">
             <button id="add-task-button">Add Task</button>
         </div>
         <ul id="task-list"></ul>
-        <button onclick="goBack()">Back to Sections</button>
+        <div class="button-container">
+            <button onclick="goBack()">Back to Sections</button>
+            <button id="deleteButton">Delete All</button>
+        </div>
     </div>
+    
+    <div class="counter-container">
+    </div>
+
     <script src="section.js"></script>
 </body>
 </html>
