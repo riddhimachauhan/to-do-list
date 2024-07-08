@@ -94,3 +94,47 @@ function deleteAllTasks() {
 
 // Load tasks on initial page load
 loadTasks();
+let timer;
+let isRunning = false;
+let timeLeft = 1500; // 25 minutes in seconds
+
+const minutesDisplay = document.getElementById('minutes');
+const secondsDisplay = document.getElementById('seconds');
+const startButton = document.getElementById('start');
+const resetButton = document.getElementById('reset');
+
+function updateDisplay() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    minutesDisplay.textContent = minutes < 10 ? '0' + minutes : minutes;
+    secondsDisplay.textContent = seconds < 10 ? '0' + seconds : seconds;
+}
+
+function startTimer() {
+    if (!isRunning) {
+        isRunning = true;
+        timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                isRunning = false;
+                alert('Time\'s up!');
+            } else {
+                timeLeft--;
+                updateDisplay();
+            }
+        }, 1000);
+    }
+}
+
+function resetTimer() {
+    clearInterval(timer);
+    isRunning = false;
+    timeLeft = 1500;
+    updateDisplay();
+}
+
+startButton.addEventListener('click', startTimer);
+resetButton.addEventListener('click', resetTimer);
+
+updateDisplay();
+

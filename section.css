@@ -1,18 +1,23 @@
 body {
     font-family: Arial, sans-serif;
     
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background: linear-gradient(rgb(22, 134, 194),rgb(19, 11, 64));
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    
 }
 
 .container {
     background-color: rgb(196, 224, 255);
     padding: 20px;
     border-radius: 8px;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
 }
@@ -28,7 +33,7 @@ h1 {
 
 .input-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -37,6 +42,9 @@ input[type="text"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    display: flex;
+    justify-content: center
+    
 }
 
 button {
@@ -46,7 +54,8 @@ button {
     color: rgb(244, 245, 255);
     border-radius: 30px;
     cursor: pointer;
-    outline:none
+    outline:none;
+    
 }
 
 button:hover {
@@ -99,4 +108,8 @@ li input[type="checkbox"] {
 #deleteButton:hover {
     background-color: #c9302c;
 }
+.box{ justify-content: center;
+    align-items: center;
+}
+
 
