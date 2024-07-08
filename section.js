@@ -15,11 +15,17 @@ function addTask() {
         const taskContent = document.createElement('span');
         taskContent.textContent = taskText;
 
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('remove-item-button');
+        deleteButton.textContent = 'X';
+
         newTask.appendChild(checkbox);
         newTask.appendChild(taskContent);
+        newTask.appendChild(deleteButton);
         taskList.appendChild(newTask);
 
         taskInput.value = '';
+        saveTasks();
     }
 }
 
@@ -31,7 +37,50 @@ function toggleTask(event) {
     } else {
         taskItem.classList.remove('completed');
     }
+    saveTasks();
 }
+
+function saveTasks() {
+    const taskList = document.getElementById('task-list');
+    const tasks = [];
+    taskList.querySelectorAll('li').forEach(taskItem => {
+        const taskText = taskItem.querySelector('span').textContent;
+        const isCompleted = taskItem.querySelector('input').checked;
+        tasks.push({ text: taskText, completed: isCompleted });
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = ''; // Clear the current list before loading
+    tasks.forEach(task => {
+        const newTask = document.createElement('li');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = task.completed;
+        checkbox.addEventListener('change', toggleTask);
+
+        const taskContent = document.createElement('span');
+        taskContent.textContent = task.text;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('remove-item-button');
+        deleteButton.textContent = 'X';
+
+        if (task.completed) {
+            newTask.classList.add('completed');
+        }
+
+        newTask.appendChild(checkbox);
+        newTask.appendChild(taskContent);
+        newTask.appendChild(deleteButton);
+        taskList.appendChild(newTask);
+    });
+}
+
 function goBack() {
     window.location.href = 'tdl.html';
 }
@@ -40,6 +89,18 @@ function goBack() {
 window.onload = function() {
     if (window.location.pathname.includes('section.html')) {
         document.getElementById('section-title').innerText = localStorage.getItem('currentSection');
-        displayTasks();
+        loadTasks();
     }
 };
+
+const deleteButton = document.getElementById("deleteButton");
+deleteButton.addEventListener("click", deleteAllTasks);
+
+function deleteAllTasks() {
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = ''; // Clear all tasks from the DOM
+    localStorage.removeItem('tasks'); // Clear all tasks from local storage
+}
+
+// Load tasks on initial page load
+loadTasks();
