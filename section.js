@@ -15,8 +15,13 @@ function addTask() {
         const taskContent = document.createElement('span');
         taskContent.textContent = taskText;
 
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('remove-item-button');
+        deleteButton.textContent = 'X';
+
         newTask.appendChild(checkbox);
         newTask.appendChild(taskContent);
+        newTask.appendChild(deleteButton);
         taskList.appendChild(newTask);
 
         taskInput.value = '';
@@ -61,12 +66,17 @@ function loadTasks() {
         const taskContent = document.createElement('span');
         taskContent.textContent = task.text;
 
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('remove-item-button');
+        deleteButton.textContent = 'X';
+
         if (task.completed) {
             newTask.classList.add('completed');
         }
 
         newTask.appendChild(checkbox);
         newTask.appendChild(taskContent);
+        newTask.appendChild(deleteButton);
         taskList.appendChild(newTask);
     });
 }
@@ -94,6 +104,7 @@ function deleteAllTasks() {
 
 // Load tasks on initial page load
 loadTasks();
+
 let timer;
 let isRunning = false;
 let timeLeft = 1500; // 25 minutes in seconds
@@ -137,4 +148,3 @@ startButton.addEventListener('click', startTimer);
 resetButton.addEventListener('click', resetTimer);
 
 updateDisplay();
-
